@@ -1,0 +1,23 @@
+{
+  "name": "mean-cource",
+  "description": "",
+  "main": "./server/app.js",
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "angular-resource": "~1.4.8",
+    "angular-sanitize": "~1.4.8"
+  }
+}

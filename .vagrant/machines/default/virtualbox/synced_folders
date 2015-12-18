@@ -1,0 +1,1 @@
+{"nfs":{"/home/vagrant/project":{"guestpath":"/home/vagrant/project","hostpath":"/C/Sites/MEAN_cource","disabled":false,"type":"nfs","map_uid":0,"map_gid":0,"nfs_udp":true,"nfs_version":3,"uuid":"3400403197","mount_options":["vers=3","udp","nolock"]}}}

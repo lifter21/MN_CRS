@@ -1,0 +1,5 @@
+./node_modules
+./vagrant
+./bower_components
+./public/lib
+*.log
