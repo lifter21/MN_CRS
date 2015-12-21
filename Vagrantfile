@@ -113,7 +113,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo dpkg -l | grep bash-completion || ( sudo apt-get install -y bash-completion )
 
     ##git
-    which git || sudo apt-get install -y git
+    which git || (sudo apt-get install -y git && git config --global alias.co checkout && git config --global alias.br branch && git config --global alias.ci commit && git config --global alias.st status && git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short' && git config --global alias.type 'cat-file -t' && git config --global alias.dump 'cat-file -p')
+
+    ## config aliases for git, vagrant and npm
 
     ##curl
     which curl || (sudo apt-get install -y curl libcurl3 libcurl3-dev php5-curl && sudo service apache2 restart)
