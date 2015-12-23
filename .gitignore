@@ -3,5 +3,5 @@
 bower_components/
 public/lib/
 *.log
-chapter1/data/
+*/**/data/
 # chapter1/node_modules/
