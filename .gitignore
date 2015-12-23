@@ -1,5 +1,7 @@
-node_modules/
+*/**/node_modules/
 .vagrant/
 bower_components/
 public/lib/
 *.log
+chapter1/data/
+# chapter1/node_modules/

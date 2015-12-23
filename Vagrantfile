@@ -116,14 +116,21 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     which git || (sudo apt-get install -y git && git config --global alias.co checkout && git config --global alias.br branch && git config --global alias.ci commit && git config --global alias.st status && git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short' && git config --global alias.type 'cat-file -t' && git config --global alias.dump 'cat-file -p')
 
     ## config aliases for git, vagrant and npm
-
+    ## $ shopt -s expand_aliases, $ source ~/.bash_aliases or $ source ~/.profile
+    # for A in "alias ns='npm start '" "alias gs='git status '" "alias ga='git add '" "alias gA='git add -A'" "alias gb='git branch '" "alias gc='git commit'" "alias gd='git diff'" "alias go='git checkout '" "alias gk='gitk --all&'" "alias gx='gitx --all'" "alias got='git '" "alias get='git '"; do
+    #   echo ${A} >> ~/.profile; # or ~/.bash_aliases
+    #   echo >> ~/.profile; # ~/.bash_aliases
+    # done
     ##curl
     which curl || (sudo apt-get install -y curl libcurl3 libcurl3-dev php5-curl && sudo service apache2 restart)
 
-    ##nodejs
+    ##nodejs,
     which npm ||
     (sudo apt-get -y install python-software-properties python && curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
   sudo apt-get install -y nodejs && sudo apt-get install -y build-essential &&  apt-get install -y nodejs-legacy)
+
+    ## nvm
+    ## which nvm ||	(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash && source ~/.profile)
 
     ##nodemon
     which nodemon || sudo npm install -g nodemon
@@ -134,6 +141,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ##mongo
     which mongo ||
     (sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list && sudo apt-get update -y && sudo apt-get install -y mongodb-org && sudo locale-gen en_US.UTF-8 && sudo dpkg-reconfigure locales && export LC_ALL=en_US.UTF-8)
+
+    ## if main OS is Windows
+	  ## which dos2unix || sudo apt-get -y install dos2unix
 
   SHELL
 
