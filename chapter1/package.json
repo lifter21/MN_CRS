@@ -1,4 +1,8 @@
 {
+  "name": "mean-cource",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
   "scripts": {
     "test": "gulp test",
     "watch": "gulp watch"

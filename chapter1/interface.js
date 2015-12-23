@@ -5,12 +5,9 @@ exports.insert = function(db, doc, callback) {
     // TODO: implement
     db.collection('movies').insert(doc, function(err, movie) {
         if (err) {
-          console.log(err);
           return callback(err);
         }
-        console.log('movie  has been successfully created: ', JSON.stringify(movie);
-          // callback(null);
-          callback(movie);
+           callback(null);
         })
     };
 
@@ -24,11 +21,10 @@ exports.insert = function(db, doc, callback) {
         // TODO: implement
         db.collection('movies').find({
           director: director
-        }).toArray(function(err, result) {
+      }).sort({title:1}).toArray(function(err, result) {
             if (err) {
-              console.log('Finding error', err);
               return callback(err);
             }
-            console.log('Result: ', JSON.stringify(result); callback(null, result);
+			callback(null, result);
             })
         };
