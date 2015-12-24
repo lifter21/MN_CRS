@@ -11,34 +11,39 @@ app
 	.factory('AuthService', function(Login, Logout, Me) {
 		var self = {
 			user: null,
-			login: function(email, password) {
+			login: function(username, password) {
 				return Login.save({
-					email: email,
+					username: username,
 					password: password
-				}).$promise.then(function(user) {
+				}, function(user) {
+					self.user = user
 					console.log(user, ' logged in');
+					return user;
 				}, function(err) {
 					console.log('Login Error: ', err.data);
-				});
+				}).$promise;
 			},
 			logout: function() {
-				return Logout.save().$promise.then(function(success) {
+				return Logout.save(function(success) {
 					console.log('Logged out: ', success);
+					self.user = null;
+					return success;
 				}, function(err) {
 					console.log('Logout Error: ', err.data);
-				});
+				}).$promise
 			},
 			isUser: function() {
 				return !!self.user;
 			},
 			Me: function() {
-				Me.get().$promise.then(function(user) {
-					self.user = user;
+				return Me.get(function(user) {
+					if (user.hasOwnProperty('local')) {
+						self.user = user;
+					}
 				}, function(err) {
 					console.log('Me get Error', err.data);
-				})
+				}).$promise
 			}
 		};
-
 		return self;
 	})

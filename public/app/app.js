@@ -1,6 +1,10 @@
 var app = angular.module('MyApp', ['ui.router', 'ngResource', 'ngSanitize'])
-	.config(function($stateProvider, $urlRouterProvider) {
+	.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
+		$httpProvider.interceptors.push('HttpInterceptor');
+
 		$urlRouterProvider.otherwise('/');
+		
 		$stateProvider
 			.state('home', {
 				url: '/',
@@ -21,3 +25,19 @@ var app = angular.module('MyApp', ['ui.router', 'ngResource', 'ngSanitize'])
 				controller: 'LogoutController'
 			})
 	})
+	.run(function($rootScope, AuthService) {
+		$rootScope.AuthService = AuthService;
+		$rootScope.AuthService.Me();
+	})
+	.factory('HttpInterceptor', function($q, $injector) {
+		return {
+			'responseError': function(rejection) {
+				// do something on error
+				if (rejection.status == 401) {
+					return $injector.get('$state').go('login');
+				}
+				return $q.reject(rejection);
+			}
+		};
+	})
+	;
