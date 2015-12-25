@@ -1,0 +1,7 @@
+-- Add user page
+
+-- Add user password edit page
+
+-- Add login/logout panel. move rootScope AuthService to panel controller
+
+-- Add OAuth login

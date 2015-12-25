@@ -11,12 +11,12 @@ var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
 	firstname: {
-	  type: String,
-	  required: true
+		type: String,
+		required: true
 	},
 	lastname: {
-	  type: String,
-	  required: true
+		type: String,
+		required: true
 	},
 	email: {
 		type: String,
@@ -28,14 +28,18 @@ var UserSchema = new Schema({
 	},
 	local: {
 		name: {
-	      type: String,
-		  index: 1,
-	      required: true
-	    },
+			type: String,
+			index: 1,
+			required: true,
+			lowercase: true
+		},
 		passwordHash: String,
 		passwordSalt: String
 	},
-	created: {type: Date, default: Date.now}
+	created: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 UserSchema.set("toJSON", {

@@ -33,18 +33,6 @@ module.exports = function(app, passport) {
 		}),
 		field('email').trim().isEmail().required().custom(function(email, payload, next) {
 			checkUserExistance(email, next);
-			// User.findOne({
-			// 	email: email
-			// }, function(err, user) {
-			// 	if (err) {
-			// 		return next(err);
-			// 	}
-			//
-			// 	if (user) {
-			// 		return next(new Error('%s already used...'));
-			// 	}
-			// 	next(null);
-			// })
 		}),
 		field('password').trim().required().minLength(3),
 		field('passConfirmation').trim().equals('field::password', "Password confirmation doesn't equal to password! ")
