@@ -4,7 +4,7 @@ var app = angular.module('MyApp', ['ui.router', 'ngResource', 'ngSanitize'])
 		$httpProvider.interceptors.push('HttpInterceptor');
 
 		$urlRouterProvider.otherwise('/');
-		
+
 		$stateProvider
 			.state('home', {
 				url: '/',
@@ -27,7 +27,7 @@ var app = angular.module('MyApp', ['ui.router', 'ngResource', 'ngSanitize'])
 	})
 	.run(function($rootScope, AuthService) {
 		$rootScope.AuthService = AuthService;
-		$rootScope.AuthService.Me();
+		$rootScope.AuthService.me();
 	})
 	.factory('HttpInterceptor', function($q, $injector) {
 		return {

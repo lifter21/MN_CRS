@@ -2,9 +2,19 @@
     <legend>Form title</legend>
 
     <div class="form-group">
-        <label for="">Name</label>
-        <input class="form-control" id="" ng-model='user.username' placeholder="Name..." required type="text">
-        <span class="text-danger" ng-repeat='nameError in formErrors.name'>{{nameError}}<br/></span>
+        <label for="">Your login</label>
+        <input class="form-control" id="" ng-model='user.username' placeholder="login..." required type="text">
+        <span class="text-danger" ng-repeat='nameError in formErrors.username'>{{nameError}}<br/></span>
+    </div>
+
+    <div class="form-group">
+        <label for="">First name</label>
+        <input class="form-control" id="" ng-model='user.firstname' placeholder="firstname..." required type="text">
+    </div>
+
+    <div class="form-group">
+        <label for="">Last name</label>
+        <input class="form-control" id="" ng-model='user.lastname' placeholder="lastname..." required type="text">
     </div>
 
     <div class="form-group">

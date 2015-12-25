@@ -5,21 +5,46 @@ module.exports = function(app, passport) {
 	var form = require('express-form');
 	var field = form.field;
 
-	var UserForm = form(
-		field('username').trim().required(),
-		field('email').trim().isEmail().required().custom(function(email, payload, next) {
-			User.findOne({
-				email: email
-			}, function(err, user) {
-				if (err) {
-					return next(err);
-				}
+	function checkUserExistance(field, next) {
+		var query = {
+			$or: [{
+				email: field
+			}, {
+				'local.name': field
+			}]
+		}
+		User.findOne(query, function(err, user) {
+			if (err) {
+				return next(err);
+			}
 
-				if (user) {
-					return next(new Error('%s already used...'));
-				}
-				next(null);
-			})
+			if (user) {
+				return next(new Error('%s already used...'));
+			}
+			next(null);
+		})
+	}
+
+	var UserForm = form(
+		field('firstname').trim(),
+		field('lastname').trim(),
+		field('username').trim().required().custom(function(username, payload, next) {
+			checkUserExistance(username, next);
+		}),
+		field('email').trim().isEmail().required().custom(function(email, payload, next) {
+			checkUserExistance(email, next);
+			// User.findOne({
+			// 	email: email
+			// }, function(err, user) {
+			// 	if (err) {
+			// 		return next(err);
+			// 	}
+			//
+			// 	if (user) {
+			// 		return next(new Error('%s already used...'));
+			// 	}
+			// 	next(null);
+			// })
 		}),
 		field('password').trim().required().minLength(3),
 		field('passConfirmation').trim().equals('field::password', "Password confirmation doesn't equal to password! ")
@@ -28,6 +53,8 @@ module.exports = function(app, passport) {
 	app.post('/api/users/register', UserForm, function(req, res, next) {
 		if (req.form.isValid) {
 			var user = new User({
+				firstname: req.form.firstname,
+				lastname: req.form.lastname,
 				email: req.form.email,
 				'local.name': req.form.username,
 				'local.password': req.form.password
@@ -64,20 +91,20 @@ module.exports = function(app, passport) {
 		})(req, res, next);
 	});
 
-    app.post('/api/logout', function(req, res) {
-        req.logout();
-        res.status(200).send();
-    });
+	app.post('/api/logout', function(req, res) {
+		req.logout();
+		res.status(200).send();
+	});
 
-    app.use('/api', function (req, res, next) {
-        if (!req.user) {
-            return res.status(401).send();
-        }
-        next();
-    })
+	app.use('/api', function(req, res, next) {
+		if (!req.user) {
+			return res.status(401).send();
+		}
+		next();
+	})
 
 	app.get('/api/users/me', function(req, res) {
-        res.json(req.user)
+		res.json(req.user)
 	});
 
 };

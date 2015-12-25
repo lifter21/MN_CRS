@@ -34,7 +34,7 @@ require('./config/passport')(passport);
 // app routes
 require('./routes')(app, passport);
 
-var server = app.listen(4000, function() {
+var server = app.listen(5000, function() {
 	var port = server.address().port;
 	console.log('Now server is running on %s port...', port);
 })

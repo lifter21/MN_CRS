@@ -62,7 +62,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="" ng-if="AuthService.isUser()">{{AuthService.user.local.name}}</a></li>
+                    <li><a href="" ng-if="AuthService.isUser()">{{AuthService.user.username}}</a></li>
                     <li><a  ng-if="!AuthService.isUser()" ui-sref="login">Login</a></li>
                     <li><a  ng-if="!AuthService.isUser()" ui-sref='registration'>Sign Up</a></li>
                     <li><a  ng-if="AuthService.isUser()" ui-sref='logout'>Logout</a></li>

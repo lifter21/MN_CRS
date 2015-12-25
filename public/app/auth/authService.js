@@ -35,15 +35,16 @@ app
 			isUser: function() {
 				return !!self.user;
 			},
-			Me: function() {
-				return Me.get(function(user) {
+			me: function() {
+				Me.get(function(user) {
 					if (user.hasOwnProperty('local')) {
 						self.user = user;
 					}
 				}, function(err) {
 					console.log('Me get Error', err.data);
-				}).$promise
+				})
 			}
 		};
 		return self;
 	})
+;
