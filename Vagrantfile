@@ -20,6 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
+  config.vm.hostname = 'mean-dev'
   config.vm.box = "ubuntu/trusty64"
   config.vm.network "private_network", ip: ip
 
