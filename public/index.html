@@ -34,8 +34,8 @@
     <script src="app/app.js"></script>
 
     <!-- UserRegistration -->
-    <script src="app\user/userService.js"></script>
-    <script src="app\user/registartionController.js"></script>
+    <script src="app\userRegistration/userService.js"></script>
+    <script src="app\userRegistration/registartionController.js"></script>
 
     <!-- Auth -->
     <script src="app\auth/authService.js"></script>
@@ -60,14 +60,10 @@
                     <li><a href="#">Tasks</a></li>
 
                 </ul>
+                <div ui-view='auth-panel'>
+                    
+                </div>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="" ng-if="AuthService.isUser()">{{AuthService.user.username}}</a></li>
-                    <li><a  ng-if="!AuthService.isUser()" ui-sref="login">Login</a></li>
-                    <li><a  ng-if="!AuthService.isUser()" ui-sref='registration'>Sign Up</a></li>
-                    <li><a  ng-if="AuthService.isUser()" ui-sref='logout'>Logout</a></li>
-
-                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>

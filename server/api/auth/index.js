@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
 	var form = require('express-form');
 	var field = form.field;
 
-	function checkUserExistance(field, next) {
+	function checkExistance(field, next) {
 		var query = {
 			$or: [{
 				email: field
@@ -29,10 +29,10 @@ module.exports = function(app, passport) {
 		field('firstname').trim(),
 		field('lastname').trim(),
 		field('username').trim().required().custom(function(username, payload, next) {
-			checkUserExistance(username, next);
-		}),
+			checkExistance(username, next);
+		}, 'such login is already used...'),
 		field('email').trim().isEmail().required().custom(function(email, payload, next) {
-			checkUserExistance(email, next);
+			checkExistance(email, next);
 		}),
 		field('password').trim().required().minLength(3),
 		field('passConfirmation').trim().equals('field::password', "Password confirmation doesn't equal to password! ")

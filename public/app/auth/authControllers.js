@@ -4,7 +4,7 @@ app
 		$scope.login = function() {
 			AuthService.login($scope.user.username , $scope.user.password)
 				.then(function(user) {
-					$state.go('home');
+					$state.go('app.home');
 				}, function(err) {
 					$scope.formErrors = err.data;
 				});
@@ -12,7 +12,11 @@ app
 	})
 	.controller('LogoutController', function($scope, $state, AuthService) {
 		AuthService.logout().then(function() {
-			$state.go('login');
+			$state.go('app.login');
 		});
+	})
+	.controller('AuthPanelController', function ($scope, AuthService) {
+		$scope.AuthService = AuthService;
+		$scope.AuthService.me();
 	})
 ;

@@ -6,38 +6,63 @@ var app = angular.module('MyApp', ['ui.router', 'ngResource', 'ngSanitize'])
 		$urlRouterProvider.otherwise('/');
 
 		$stateProvider
-			.state('home', {
+			.state('app', {
+				url: '',
+				abstract: true,
+				views: {
+					'auth-panel': {
+						controller: 'AuthPanelController',
+						templateUrl: '/app/auth/authPanel.html'
+					}
+				}
+			})
+			.state('app.home', {
 				url: '/',
-				templateUrl: '/app/home/home.html'
+				views: {
+					'@': {
+						templateUrl: '/app/home/home.html'
+					}
+				}
 			})
-			.state('registration', {
+			.state('app.registration', {
 				url: '/registration',
-				controller: 'UserRegistrationController',
-				templateUrl: '/app/user/registrationForm.html'
+				views: {
+					'@': {
+						controller: 'UserRegistrationController',
+						templateUrl: '/app/userRegistration/registrationForm.html'
+					}
+				}
 			})
-			.state('login', {
+			.state('app.login', {
 				url: '/login',
-				controller: 'LoginController',
-				templateUrl: '/app/auth/loginForm.html'
+				views: {
+					'@': {
+					controller: 'LoginController',
+					templateUrl: '/app/auth/loginForm.html'
+				}
+			}
 			})
-			.state('logout', {
+			.state('app.logout', {
 				url: '/logout',
-				controller: 'LogoutController'
+				views: {
+					'@': {
+						controller: 'LogoutController'
+					}
+				}
 			})
 	})
-	.run(function($rootScope, AuthService) {
-		$rootScope.AuthService = AuthService;
-		$rootScope.AuthService.me();
-	})
+	// .run(function($rootScope, AuthService) {
+	// 	$rootScope.AuthService = AuthService;
+	// 	$rootScope.AuthService.me();
+	// })
 	.factory('HttpInterceptor', function($q, $injector) {
 		return {
 			'responseError': function(rejection) {
 				// do something on error
 				if (rejection.status == 401) {
-					return $injector.get('$state').go('login');
+					return $injector.get('$state').go('app.login');
 				}
 				return $q.reject(rejection);
 			}
 		};
-	})
-	;
+	});

@@ -7,7 +7,7 @@ app
 
 			$scope.user.$save().then(function(user) {
 				console.log(user, ' Successfully registered');
-				$state.go('login')
+				$state.go('app.login')
 			}, function(err) {
 				console.log('Registration Error: ', err.data);
 				$scope.formErrors = err.data;
