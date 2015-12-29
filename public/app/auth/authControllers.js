@@ -6,7 +6,7 @@ app
 				.then(function(user) {
 					$state.go('app.home');
 				}, function(err) {
-					$scope.formErrors = err.data;
+					$scope.loginError = err.data.login;
 				});
 		};
 	})

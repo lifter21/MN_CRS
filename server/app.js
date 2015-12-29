@@ -6,12 +6,15 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+MongoStore = require('connect-mongo')(session);
 
 var dbUrl = "mongodb://localhost/app";
 mongoose.connect(dbUrl);
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
 // parse application/json
 app.use(bodyParser.json());
 
@@ -21,7 +24,10 @@ app.use(session({
 	saveUninitialized: true,
 	cookie: {
 		maxAge: 4 * 7 * 24 * 60 * 60 * 1000
-	}
+	},
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection
+	})
 }));
 
 app.use(passport.initialize());

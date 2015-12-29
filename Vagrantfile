@@ -1,7 +1,7 @@
 VAGRANTFILE_API_VERSION = 2
 
-name = "mean-cource"
-memory = "512"
+name = "mean-cource-new"
+memory = "640"
 cpu="2"
 type="nfs" # "", "nfs"
 ip = "192.168.56.4"
@@ -114,7 +114,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo dpkg -l | grep bash-completion || ( sudo apt-get install -y bash-completion )
 
     ##git
-    which git || (sudo apt-get install -y git && git config --global alias.co checkout && git config --global alias.br branch && git config --global alias.ci commit && git config --global alias.st status && git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short' && git config --global alias.type 'cat-file -t' && git config --global alias.dump 'cat-file -p')
+    which git || (sudo apt-get install -y git)
+
+    # git config --global alias.co checkout && git config --global alias.br branch && git config --global alias.ci commit && git config --global alias.st status && git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short' && git config --global alias.type 'cat-file -t' && git config --global alias.dump 'cat-file -p'
 
     ## config aliases for git, vagrant and npm
     ## $ shopt -s expand_aliases, $ source ~/.bash_aliases or $ source ~/.profile
@@ -144,7 +146,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     (sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10 && echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list && sudo apt-get update -y && sudo apt-get install -y mongodb-org && sudo locale-gen en_US.UTF-8 && sudo dpkg-reconfigure locales && export LC_ALL=en_US.UTF-8)
 
     ## if main OS is Windows
-	  ## which dos2unix || sudo apt-get -y install dos2unix
+	 which dos2unix || sudo apt-get -y install dos2unix
 
   SHELL
 

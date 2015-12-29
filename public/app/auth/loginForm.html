@@ -2,6 +2,7 @@
   <legend>Login</legend>
 
   <div class="form-group">
+    <span class="text-danger" ng-if='loginError'>{{loginError}}</span><br/>
     <label for="">E-mail or username</label>
     <input class="form-control" id="" ng-model='user.username' placeholder="E-mail"  required type="text">
   </div>

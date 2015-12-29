@@ -1,5 +1,5 @@
-app
-	.factory('UserRegistration', function($resource) {
-		return $resource('/api/users/register');
-	})
-;
+// app
+// 	.factory('UserRegistration', function($resource) {
+// 		return $resource('/api/users/register');
+// 	})
+// ;

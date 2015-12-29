@@ -1,4 +1,7 @@
 app
+	.factory('UserRegistration', function($resource) {
+		return $resource('/api/users/register');
+	})
 	.controller('UserRegistrationController', function($scope, $state, UserRegistration,$filter) {
 		$scope.user = new UserRegistration();
 		$scope.register = function() {

@@ -68,7 +68,7 @@ module.exports = function(app, passport) {
 				return next(err);
 			}
 			if (!user) {
-				return res.status(403).send();
+				return res.status(403).send({login: 'Invalid login data'});
 			}
 			req.logIn(user, function(err) {
 				if (err) {

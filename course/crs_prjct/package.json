@@ -1,0 +1,24 @@
+{
+    "name": "shop-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server/app.js",
+    "scripts": {
+        "test": "mocha test.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.14.2",
+        "express": "^4.13.3",
+        "express-form": "^0.12.4",
+        "express-session": "^1.12.1",
+        "http-status": "^0.2.0",
+        "mongoose": "^4.3.4",
+        "wagner-core": "^0.2.0"
+    },
+    "devDependencies": {
+        "superagent": "^1.6.1",
+        "mocha": "^2.3.4"
+    }
+}

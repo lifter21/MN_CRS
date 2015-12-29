@@ -1,8 +1,10 @@
 # TODO:
 -- Add user page
 
--- Add user password edit page
+-- Add user profile/password edit page
 
--- Add login/logout panel. move rootScope AuthService to panel controller
+-- add email confirmation
+
+-- add forgot password page
 
 -- Add OAuth login
