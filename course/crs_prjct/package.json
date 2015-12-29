@@ -4,6 +4,7 @@
     "description": "",
     "main": "server/app.js",
     "scripts": {
+        "start": "nodemon server/app.js -L -w server -i node_modules ",
         "test": "mocha test.js"
     },
     "author": "",
