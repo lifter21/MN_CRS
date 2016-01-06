@@ -1,6 +1,6 @@
 {
-  "facebookClientId": "TODO",
-  "facebookClientSecret": "TODO",
-  "stripeKey": "TODO",
-  "openExchangeRatesKey": "TODO"
+    "facebookClientId": "972009286198208",
+    "facebookClientSecret": "972c722e00db31817b3563d2cb390c22",
+    "stripeKey": "sk_test_rMalY8SQF29e2ityhtnoiVHF",
+    "openExchangeRatesKey": "3438ba35738443dfad9d37a1127375ba"
 }

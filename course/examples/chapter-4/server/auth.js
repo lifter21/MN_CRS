@@ -1,5 +1,4 @@
-// TODO: make setupAuth depend on the Config service...
-function setupAuth(User, app) {
+function setupAuth(User, Config, app) {
   var passport = require('passport');
   var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -15,15 +14,11 @@ function setupAuth(User, app) {
   });
 
   // Facebook-specific
-  var config = require('./config.json');
   passport.use(new FacebookStrategy(
     {
-      // TODO: and use the Config service here
-      clientID: config.facebookClientId,
-      clientSecret: config.facebookClientSecret,
-      callbackURL: 'http://localhost:3000/auth/facebook/callback',
-      // Necessary for new version of Facebook graph API
-      profileFields: ['id', 'emails', 'name']
+      clientID: Config.facebookClientId,
+      clientSecret: Config.facebookClientSecret,
+      callbackURL: 'http://localhost:3000/auth/facebook/callback'
     },
     function(accessToken, refreshToken, profile, done) {
       if (!profile.emails || !profile.emails.length) {
@@ -54,12 +49,24 @@ function setupAuth(User, app) {
 
   // Express routes for auth
   app.get('/auth/facebook',
-    passport.authenticate('facebook', { scope: ['email'] }));
+    function(req, res, next) {
+      var redirect = encodeURIComponent(req.query.redirect || '/');
+
+      passport.authenticate('facebook',
+        {
+          scope: ['email'],
+          callbackURL: 'http://localhost:3000/auth/facebook/callback?redirect=' + redirect
+        })(req, res, next);
+    });
 
   app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/fail' }),
+    function(req, res, next) {
+      var url = 'http://localhost:3000/auth/facebook/callback?redirect=' +
+        encodeURIComponent(req.query.redirect);
+      passport.authenticate('facebook', { callbackURL: url })(req, res, next);
+    },
     function(req, res) {
-      res.send('Welcome, ' + req.user.profile.username);
+      res.redirect(req.query.redirect);
     });
 }
 
