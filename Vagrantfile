@@ -79,7 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # end
    config.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
-     # vb.gui = true
+     vb.gui = true
      vb.name = name
      # Customize the amount of memory on the VM:
      vb.memory = memory
@@ -147,7 +147,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     ## if main OS is Windows
 	 which dos2unix || sudo apt-get -y install dos2unix
-
+    ## if GUI needed:
+    ## sudo apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+    ## sudo VBoxClient-all
+    ## sudo startxfce4&
   SHELL
 
 end
